@@ -72,3 +72,7 @@ FFMC = Fine Fuel Moisture Code: Measures moisture content of surface litter.  Af
 DMC = Duff Moisture Code: Moisture content of decomposing organic layers beneath suface litter.  0 is wet, high values indicate dryer conditions
 DC = Drought Code: Moisture in deep organic layers and larger fuels like logs.  Indicates long term drought effects.  0 (wet) up to 800 for dry
 ISI = Initial Spread Index: Combines wind speed and FFMC to estimate rate of fire spread.  Higher values mean faster spread
+
+Units:
+
+ha = hectares and 1 hectares is equal to 2.471 acres
