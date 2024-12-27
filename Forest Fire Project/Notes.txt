@@ -1,0 +1,7 @@
+try the log transformation of the response variable
+
+Figure out what it means to do feature engineering by converting to polynomial and creating interation terms
+
+apply random over_sampling
+
+try dropping some of the 0's and running it again
