@@ -1,0 +1,57 @@
+pandas
+
+numpy
+
+matplotlib.pyplot
+
+seaborn
+
+scipy.stats
+ - zscore
+
+sklearn.metrics
+ - mean_absolute_error
+ - mean_squared_error
+ - root_mean_squared_error
+ - r2_score
+ - classification_report
+
+sklearn.model_selection
+ - train_test_split
+ - GridSearchCV
+ - cross_val_score
+
+sklearn.linear_model
+ - LinearRegression
+ - Ridge
+ - Lasso
+
+statsmodels.api
+
+sklearn.svm
+ - SVR
+
+smogn
+
+statsmodels.robust.scale
+ - mad
+
+sklearn.inspection
+ - PartialDependenceDisplay
+
+sklearn.ensemble
+ - RandomForestRegressor
+ - RandomForestClassifier
+
+sklearn.preprocessing
+ - PolynomialFeatures
+
+sklearn.decomposition 
+ - PCA
+
+statsmodels.stats.outliers_influence
+ - variance_inflation_factor
+
+
+
+

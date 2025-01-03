@@ -1,6 +1,22 @@
 from sklearn.svm import SVR
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import zscore
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import statsmodels.api as sm
+from sklearn.model_selection import train_test_split
+from statsmodels.robust.scale import mad
+
 
 # Prepping data for modeling
+
+df = pd.read_csv('C:/Users/Taylor/OneDrive/Desktop/GitHub local repo/Forest-Fire/Forest Fire Project/forestfires.csv')
+
+# ln(x+1) transformation on target
+
+df['area_ln'] = np.log1p(df['area'])
 
 X_svm = df[['FFMC', 'DMC', 'DC', 'ISI', 'wind', 'temp', 'RH']].apply(zscore)
 
@@ -23,6 +39,8 @@ svm_preds = svm_model.predict(X_test)
 
 svm_r2 = r2_score(y_test, svm_preds)
 svm_rmse = root_mean_squared_error(y_test, svm_preds)
+
+mad_value = mad(residuals)
 
 #Plotting results
 
@@ -71,6 +89,10 @@ svm_model02.fit(X_train, y_train)
 svm_preds02 = svm_model02.predict(X_test)
 
 svm_r2_02 = r2_score(y_test, svm_preds02)
+
+residuals = y_test - svm_preds02
+
+mad_value = mad(residuals)
 
 plt.scatter(y_test, svm_preds02)
 plt.plot(
