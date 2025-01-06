@@ -3,6 +3,8 @@ from sklearn.svm import SVR
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, root_mean_squared_error
 from statsmodels.robust.scale import mad
 
+#Oversampling using SMOTE for regression
+
 df_smogn = smogn.smoter(
     data = df,
     y = 'area',
@@ -33,6 +35,14 @@ svm_preds = svm_model.predict(X_test)
 svm_r2 = r2_score(y_test, svm_preds)
 svm_rmse = root_mean_squared_error(y_test, svm_preds)
 
+"""
+R^2 of -.06
+"""
+
 residuals = y_test - svm_preds
 
 svm_mad = mad(residuals)
+
+"""
+Using MAD, the og researchers preferred method, the value was 16.3,
+4 points higher than what they ended up with"""

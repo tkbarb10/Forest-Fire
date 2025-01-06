@@ -12,7 +12,7 @@ from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 
-df = pd.read_csv('C:/Users/Taylor/OneDrive/Desktop/GitHub local repo/Forest-Fire/Forest Fire Project/forestfires.csv')
+df = pd.read_csv('C:\Users\Taylor\OneDrive\Desktop\GitHub local repo\Forest-Fire\Forest Fire Project\forestfires.csv')
 
 df.head()
 
@@ -42,16 +42,9 @@ df_standard = df.iloc[:, 4:12].apply(zscore)
 
 df_modeling = pd.concat([df_cat, df_standard], axis = 1)
 
-#Dropping the two outliers over 500
-
-
 #Starting over and attempting this as a classifaction problem
 
 #Converting 'area' feature to 0/1
-
-"""
-Add the two outliers back for this
-"""
 
 df['area'] = df['area'].apply(lambda x: 1 if x > 0 else x)
 
@@ -68,7 +61,7 @@ df_standard = df.iloc[:, 4:12]
 
 df_modeling = pd.concat([df_cat, df_standard], axis = 1)
 
-#Attempt Random Forest again
+# Attempt Random Forest again
 
 y_class = df['area']
 
@@ -134,6 +127,10 @@ print(classification_report(y_test, preds02))
 Well that lowered the accuracy of the model so not the most effective tactic
 """
 
+"""
+Calculating VIF to identify multicollinearity and then dropping features above a VIF of 5
+"""
+
 df_modeling_const = sm.add_constant(df_modeling)
 
 boolean_columns = df_modeling_const.select_dtypes(include = 'bool').astype(int).columns
@@ -148,6 +145,10 @@ vif = vif.sort_values(by = 'VIF', ascending = False)
 subset = vif[1:7]['Feature'].values
 
 df_modeling.drop(columns = subset, inplace = True)
+
+"""
+Trying Random Forest again
+"""
 
 X_train, X_test, y_train, y_test = train_test_split(
     df_modeling,
@@ -169,6 +170,6 @@ preds03 = rf_model03.predict(X_test)
 print(classification_report(y_test, preds03))
 
 """
-Captured more of the areas that had been burned but at the 
-expense of everything else.  Resetting and starting from scratch
+Captured more of the areas that had been burned (higher sensitivity) but at the 
+expense of accuracy and precision
 """

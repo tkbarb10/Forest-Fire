@@ -36,6 +36,10 @@ rf_preds = rf_model.predict(X_test)
 
 rf_r2 = r2_score(y_test, rf_preds)
 
+"""
+R^2 of -2.18 which I think is the worst result yet
+"""
+
 # Parameter tuning
 
 parameters = {
@@ -73,6 +77,10 @@ rf_best.fit(X_train, y_train)
 preds = rf_best.predict(X_test)
 
 r2_best = r2_score(y_test, preds)
+
+"""
+-.16 R^2 value, they weren't kidding about this being a tough
+regression problem"""
 
 rf_best.feature_importances_
 

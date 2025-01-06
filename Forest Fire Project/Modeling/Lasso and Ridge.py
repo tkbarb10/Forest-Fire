@@ -9,6 +9,10 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, r
 
 df = pd.read_csv('C:/Users/Taylor/OneDrive/Desktop/GitHub local repo/Forest-Fire/Forest Fire Project/forestfires.csv')
 
+"""
+Checking Correlations
+"""
+
 df_corr = df.iloc[:, 4:13]
 
 cor_matrix = df_corr.corr()
@@ -54,6 +58,13 @@ base_mse = mean_squared_error(y_test, lr_preds)
 base_r2 = r2_score(y_test, lr_preds)
 base_rmse = root_mean_squared_error(y_test, lr_preds)
 
+"""
+Low MSE of .49 and low MAE of .38 however the R^2 is a negative value.
+On average the predicitions the model is making are close to the true values
+but it isn't capturing the variation present in the data
+"""
+# Coefficients of the predictors
+
 coef_df = pd.DataFrame({
     'Features': X.columns,
     'Coefficients': lr_model.coef_
@@ -79,6 +90,9 @@ mse_avg = cv_scores.mean()
 
 r2_avg = cv_scores.mean()
 
+"""
+Both of these are massive values so something when astray when running the model"""
+
 #Ridge Method
 
 ridge_model = Ridge()
@@ -91,6 +105,10 @@ ridge_mse = mean_squared_error(y_test, ridge_preds)
 ridge_r2 = r2_score(y_test, ridge_preds)
 ridge_rmse = root_mean_squared_error(y_test, ridge_preds)
 
+"""
+MSE is the same as the baseline model as is R^2
+ """
+
 #Lasso Method
 
 lasso_model = Lasso(random_state = 10)
@@ -102,6 +120,10 @@ lasso_preds = lasso_model.predict(X_test)
 lasso_mse = mean_squared_error(y_test, lasso_preds)
 lasso_r2 = r2_score(y_test, lasso_preds)
 lasso_rmse = root_mean_squared_error(y_test, lasso_preds)
+
+"""
+Slightly lower MSE and R^2 went from -.09 to -.007 so there is
+some improvement with this method but still atrocious"""
 
 #Ridge Parameter Tuning
 
@@ -138,6 +160,10 @@ ridge_r2_02 = r2_score(y_test, ridge_preds02)
 ridge_rmse02 = root_mean_squared_error(y_test, ridge_preds02)
 
 ridge_model02.coef_
+
+"""
+R^2 is -.003 so best performance yet
+"""
 
 #Lasso hyperparameter tuning
 
@@ -178,4 +204,8 @@ lasso_mse02 = mean_squared_error(y_test, lasso_preds02)
 
 lasso_model02.coef_
 
-X_train.columns[21]
+"""R^2 ended up being -.004 so hyperparameter tuning with ridge
+was the best method.  The issue is probably how many 0 values there are.
+The average deviation in prediction is low because the models
+are making a lot of predictions at or close to 0, but it's not predicting
+the actual burn areas with any accuracy"""

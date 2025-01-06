@@ -1,3 +1,5 @@
+# Getting rid of 0 values for target variable
+
 df_no_zero = df[df['area'] > 0]
 
 # SVM modeling
@@ -19,6 +21,10 @@ svm.fit(X_train, y_train)
 preds = svm.predict(X_test)
 
 r2_no_zero = r2_score(y_test, preds)
+
+"""
+-.03 so no better than the linear models
+"""
 
 plt.scatter(y_test, preds)
 plt.plot(
@@ -50,6 +56,10 @@ svm.fit(X_train, y_train)
 preds = svm.predict(X_test)
 
 r2_no_zero = r2_score(y_test, preds)
+
+"""
+R^2 now -.2 so dropping outliers didn't help the model
+"""
 
 plt.scatter(y_test, preds)
 plt.plot(

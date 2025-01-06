@@ -42,6 +42,10 @@ svm_rmse = root_mean_squared_error(y_test, svm_preds)
 
 mad_value = mad(residuals)
 
+"""
+R^2 of -.239 and MAD of 16.28
+"""
+
 #Plotting results
 
 plt.scatter(y_test, svm_preds)
@@ -52,6 +56,11 @@ plt.plot(
     linestyle = '--'
     )
 plt.show()
+
+"""
+Predictions are sorta better on the lower then go off the rails
+pretty quick
+"""
 
 # Plotting residuals
 
@@ -93,6 +102,12 @@ svm_r2_02 = r2_score(y_test, svm_preds02)
 residuals = y_test - svm_preds02
 
 mad_value = mad(residuals)
+
+"""
+R^2 is worse at -.369 but MAD is way better at 1.13.
+But if we're looking to make accurate predictions then
+none of these are any good
+"""
 
 plt.scatter(y_test, svm_preds02)
 plt.plot(
